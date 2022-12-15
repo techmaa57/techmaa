@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html class="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    </head>
+    <body>
+        <main>
+            <section class="bg-white dark:bg-gray-900">
+                <nav
+                    x-data="{ isOpen: false }"
+                    class="container mx-auto p-6 lg:flex lg:items-center lg:justify-between"
+                >
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <img
+                                src="./assets/logo.png"
+                                alt=""
+                                class="h-9 mr-3 sm:h-24"
+                            />
+                        </div>
+
+                        <!-- Mobile menu button -->
+                        <div class="flex lg:hidden">
+                            <button
+                                x-cloak
+                                @click="isOpen = !isOpen"
+                                type="button"
+                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                aria-label="toggle menu"
+                            >
+                                <svg
+                                    x-show="!isOpen"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M4 8h16M4 16h16"
+                                    />
+                                </svg>
+
+                                <svg
+                                    x-show="isOpen"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+                    <div
+                        x-cloak
+                        :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
+                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:dark:bg-transparent"
+                    >
+                        <div
+                            class="lg:-px-8 flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0"
+                        >
+                            <a
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8"
+                                href="#"
+                                >Home</a
+                            >
+                            <a
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8"
+                                href="#"
+                                >Shop</a
+                            >
+                            <a
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8"
+                                href="#"
+                                >About us</a
+                            >
+                            <a
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8"
+                                href="#"
+                                >Privacy Policy</a
+                            >
+                        </div>
+
+                        <a
+                            class="mt-4 block rounded-lg bg-blue-600 px-6 py-2.5 text-center font-medium capitalize leading-5 text-white hover:bg-blue-500 lg:mt-0 lg:w-auto"
+                            href="#"
+                        >
+                            Get started
+                        </a>
+                    </div>
+                </nav>
+            </section>
+
+            <section class="bg-gray-100 dark:bg-gray-800">
+                <div class="container mx-auto px-6 py-10">
+                    <h1
+                        class="text-center text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl"
+                    >
+                        Policy
+                    </h1>
+
+                    <div class="mx-auto mt-6 flex justify-center">
+                        <span
+                            class="inline-block h-1 w-40 rounded-full bg-blue-500"
+                        ></span>
+                        <span
+                            class="mx-1 inline-block h-1 w-3 rounded-full bg-blue-500"
+                        ></span>
+                        <span
+                            class="inline-block h-1 w-1 rounded-full bg-blue-500"
+                        ></span>
+                    </div>
+
+                    <div>
+                        <h1
+                            class="mt-6 text-xl font-semibold text-gray-800 dark:text-white"
+                        >
+                            1. Privacy Policy
+                        </h1>
+                        <p class="font-bold text-gray-700 mt-5">
+                            Thank you for visiting our website.
+                        </p>
+                        <p class="mt-6 text-gray-600 dark:text-gray-300">
+                            We have adopted and implemented the following
+                            privacy policy as part of our commitment to
+                            protecting your privacy and personal information.
+                            This policy describes what information we collect
+                            from visitors to our site and how we will use that
+                            information. Our site is intended for customers and
+                            users located in the United States.
+                            <br />
+                            You do not need to sign in or register to browse our
+                            site. This means you may browse the web pages
+                            without providing any personal identifying
+                            information ("PII").
+                            <br />
+                            If you make an inquiry or choose to make a purchase
+                            while accessing our site, we will ask that you
+                            provide certain PII needed to respond to the inquiry
+                            or complete the transaction. For example, if you ask
+                            us for additional information about a product, we
+                            will ask for your email address in order that we may
+                            respond to your inquiry. If you purchase one of our
+                            products, we will ask that you provide us with the
+                            information needed in order to process your order,
+                            charge your credit card account, send a message
+                            confirming your order and deliver the product you
+                            have purchased. This information may include your
+                            first and last name, your credit card number,
+                            expiration date and security code, your billing and
+                            shipping address, email address, and telephone
+                            number. Except as otherwise outlined in this policy,
+                            we do not give, sell, or trade to other firms or our
+                            affiliates any PII about you or your transactions
+                            with us, nor will we contact you using this
+                            information beyond the scope of your inquiry or
+                            transaction unless you specifically authorize us to.
+                            <br />
+                            In responding to any inquiry or fulfilling any
+                            transaction with you, we may employ third-party
+                            companies to perform functions on our behalf. These
+                            functions may include order fulfillment, package
+                            delivery, marketing assistance, postal and email
+                            delivery, customer service, data analysis, and
+                            credit card processing. The third parties who
+                            perform these services for us have limited access to
+                            your PII and have promised us they will not use it
+                            for other purposes.
+                            <br />
+                            If you make a purchase through our website we may
+                            use this information, alone or in conjunction with
+                            other publicly available information, to identify
+                            other products or services that we think you may be
+                            interested in purchasing and in sending you
+                            information about those other products or services.
+                            Sometimes we share some of this information, such as
+                            your name and email address, with our affiliate
+                            companies and with other companies who offer
+                            products and services that we think may be of
+                            interest to you. If you do not wish to receive these
+                            messages or prefer that we not share your
+                            information with any other companies, please
+                            deselect the "opt-in" or remove the checkmark from
+                            the box on the Checkout page. If you decline to
+                            "opt-in" by following the process above, we will not
+                            give, sell, or trade to another firm or our
+                            affiliates any of the information you provide us,
+                            except as otherwise outlined in this policy, nor
+                            will we contact you regarding other products or
+                            services. If you "opt-in" and later decide that you
+                            no longer wish to receive messages from us, please
+                            Contact Us and we will honor your request within 10
+                            days.
+                            <br />
+                            If you keep the "opt-in" box marked or if you
+                            otherwise give us authorization, you may receive
+                            periodic emails regarding products or services that
+                            we think may be of interest to you. Upon receipt of
+                            these emails, you may opt-out of receiving further
+                            emails by clicking the "Unsubscribe" link at the
+                            bottom of the email received or clicking the
+                            following link: unsubscribe to unsubscribe from
+                            future emails. It may take us up to 10 days to
+                            complete this process. If you choose, you may once
+                            again authorize us to send you emails regarding
+                            products or services that we think may be of
+                            interest to you.
+                            <br />
+                            At any time, you may update or review your stored
+                            account information through our Web site by logging
+                            into the "My Account" page (via the Log In link on
+                            the upper right of the website) or by contacting us.
+                            You must have your username and password to access
+                            your account information. In the event, you forget
+                            both your username and password, either follow the
+                            instructions on the "My Account" login page or
+                            contact us for assistance.
+                            <br />
+                            We use Secure Socket Layer Technology ("SSL") to
+                            encrypt the PII you send to us through our site so
+                            that it cannot be read in transit. All of your PII
+                            including your credit card number, mailing address,
+                            email address, and telephone number, as well as
+                            information related to your order, will be
+                            transmitted encrypted to protect your privacy.
+                            Further, to ensure that your PII is secure, we store
+                            it in a database that is not accessible over the
+                            Internet and will not be displayed anywhere on this
+                            website.
+                            <br />
+                            Some of the pages on our website use "cookies" to
+                            help us better serve visitors to our site. Cookies
+                            are brief text messages transmitted by a website to
+                            the hard drive of your computer when you click on a
+                            page. Should you return to the page at a later time,
+                            your computer will transmit the text message back to
+                            the website server to permit the server to recall
+                            previous visits to our site or to keep track of a
+                            transaction in progress. You may set your browser to
+                            reject cookies by changing the settings on your
+                            browser. Doing this, however, could diminish your
+                            use of our site or prevent the use of certain
+                            features. Cookies are not linked to any PII.
+                            <br />
+                            Some pages of our website use "action tags," which
+                            are also known as a clear GIFs or web beacons. An
+                            action tag is an invisible tag that may be placed on
+                            certain pages of our site but not on your computer.
+                            When you access these pages, the action tags
+                            generate a generic code of that visit. Action tags
+                            are not linked to any PII.
+                            <br />
+                            Like most websites, we use log files to analyze
+                            trends, administer the site, track user movement and
+                            gather other information. The log files contain
+                            information such as Internet protocol addresses,
+                            browser type used, Internet Service Provider (or
+                            ISP) information, referring/exit pages, platform
+                            type, date/time, and the number of clicks. On
+                            occasion, we may share information from our log
+                            files with our business partners and advertisers.
+                            This information is provided on an aggregated and
+                            anonymous basis. The contents of the log files are
+                            not linked to any PII.
+                            <br />
+                            For website analytics, we use two methods of
+                            tracking user behavior. Server log files and
+                            javascript tracking tags are used to analyze trends,
+                            administer the site, track user movement, and gather
+                            other information. These tracking methods provide us
+                            with information such as internet protocol
+                            addresses, browser type used, Internet Service
+                            Provider information, referring/exit pages, platform
+                            type, date/time, number of visitors, geographic
+                            location, and eCommerce data. On occasion, we may
+                            share this information with our business partners
+                            and advertisers. This information is provided on an
+                            aggregated and anonymous basis. The contents of
+                            these tracking methods are not linked to any PII.
+                            The log-based tracking utility used is Urchin
+                            Tracking by Google, and our javascript tracking
+                            utility is Google Analytics.
+                            <br />
+                            Our website contains links to other third-party
+                            sites. If you choose to visit other sites from our
+                            site, we are not responsible for the privacy
+                            practices or content of those other sites. The
+                            third-party promotions or advertisements displayed
+                            on our site may contain cookies. We do not have
+                            access to or control over information collected by
+                            outside advertisers on our site.
+                            <br />
+                            Third-party vendors, including Google, show Concept
+                            101 advertisements on third-party websites. Such
+                            third-party vendors use cookies to serve
+                            advertisements based on your prior visits to our
+                            website. You may opt-out of Google’s use of cookies
+                            by visiting the Google advertising opt-out page,
+                            located at: http://www.google.com/privacy/ads/
+                            <br />
+                            We do not sell products for purchase by children.
+                            All of our products (including products intended to
+                            be used by children) are intended to be purchased by
+                            adults. If you are under 18 years old and you want
+                            to buy a product through our Web site, you must have
+                            an adult buy it for you. We have not designed our
+                            website to encourage transactions with, or to obtain
+                            information from, children. We respect the sensitive
+                            nature of children's privacy online. Therefore, if
+                            we learn that a user is under 13 years of age, we
+                            will promptly delete any PII in that user's account,
+                            and if, before shipment, we learn that a user under
+                            18 years old made a purchase through our website
+                            without adult involvement, the order will not be
+                            processed.
+                            <br />
+                            If required by law or legal proceedings or to
+                            enforce our legal rights, we may disclose the
+                            personal information of a customer or aggregated
+                            data collected on the site. Additionally, in order
+                            to accommodate changes in our business, we may sell
+                            portions of our company or its assets. If we or a
+                            substantial part of our assets are sold, we may
+                            transfer the information collected through this
+                            website to the purchaser as part of the sale.
+                            <br />
+                            If you have any questions about our privacy policy
+                            or the practices of this site, please Contact Us. We
+                            may from time to time change our privacy policy;
+                            such changes will be posted here. Each time you
+                            access our website, you agree that the information
+                            that we gather now will be subject to the privacy
+                            policy in effect at that time. You should check this
+                            page for revisions periodically.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h1
+                            class="mt-6 text-xl font-semibold text-gray-800 dark:text-white"
+                        >
+                            2. Return & Exchange Policy
+                        </h1>
+                        <ul class="list-disc pl-5">
+                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                                2 days for all products
+                            </li>
+                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                                Unopened products may be returned within 2 days
+                                of delivery receipt for a full refund.
+                            </li>
+                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                                Opened products may be returned within 2 days of
+                                delivery.
+                            </li>
+                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                                A 10% restocking fee may be applied based on the
+                                condition of the product and packaging to all
+                                opened products.
+                            </li>
+                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                                Return freight is the responsibility of the
+                                purchaser unless the item is deemed defective.
+                            </li>
+                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                                To initiate a return, please contact Order
+                                Support.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="bg-white dark:bg-gray-900">
+                <div class="container mx-auto px-6 py-12">
+                    <div
+                        class="md:-mx-3 md:flex md:items-center md:justify-between"
+                    >
+                        <h1
+                            class="text-3xl font-semibold tracking-tight text-gray-800 dark:text-white md:mx-3 xl:text-4xl"
+                        >
+                            Subscribe our newsletter to get update.
+                        </h1>
+
+                        <div class="mt-6 shrink-0 md:mx-3 md:mt-0 md:w-auto">
+                            <a
+                                href="#"
+                                class="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2 text-sm text-white duration-300 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80"
+                            >
+                                <span class="mx-2">Sign Up Now</span>
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    class="mx-2 h-6 w-6"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <hr
+                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
+                    />
+
+                    <div
+                        class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+                    >
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Quick Link
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Home</a
+                                >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Who We Are</a
+                                >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Our Philosophy</a
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Industries
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Retail & E-Commerce</a
+                                >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Information Technology</a
+                                >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Finance & Insurance</a
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Services
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Translation</a
+                                >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Proofreading & Editing</a
+                                >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Content Creation</a
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Contact Us
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >+880 768 473 4978</a
+                                >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >info@merakiui.com</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr
+                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
+                    />
+
+                    <div
+                        class="flex flex-col items-center justify-between sm:flex-row"
+                    >
+                        <a
+                            href="#"
+                            class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                            >Brand</a
+                        >
+
+                        <p
+                            class="mt-4 text-sm text-gray-500 dark:text-gray-300 sm:mt-0"
+                        >
+                            © Copyright 2021. All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </body>
+</html>

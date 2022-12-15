@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+        <script src="./alpinejs.min.js" defer></script>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div class="flex justify-center absolute right-0">
+            <div
+                x-data="{
+                    open: false,
+                    lang: 'en',
+                    toggle() {
+                        if (this.open) {
+                            return this.close()
+                        }
+
+                        this.$refs.button.focus()
+
+                        this.open = true
+                    },
+                    close(focusAfter) {
+                        if (! this.open) return
+
+                        this.open = false
+
+                        focusAfter && focusAfter.focus()
+                    }
+                }"
+                x-on:keydown.escape.prevent.stop="close($refs.button)"
+                x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+                x-id="['dropdown-button']"
+                class="relative"
+            >
+                <!-- Button -->
+                <button
+                    x-ref="button"
+                    x-on:click="toggle()"
+                    :aria-expanded="open"
+                    :aria-controls="$id('dropdown-button')"
+                    type="button"
+                    class="px-2 py-1 text-gray-700 bg-white hover:bg-gray-200 focus:outline-none font-medium text-sm text-center inline-flex items-center"
+                >
+                    <img class="w-6 mr-1" id="lang-img" src="" alt="" />
+                    <span id="lang-text"></span>
+                    <!-- Heroicon: chevron-down -->
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 text-gray-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        />
+                    </svg>
+                </button>
+
+                <!-- Panel -->
+                <div
+                    x-ref="panel"
+                    x-show="open"
+                    x-transition.origin.top.left
+                    x-on:click.outside="close($refs.button)"
+                    :id="$id('dropdown-button')"
+                    style="display: none"
+                    class="absolute right-0 mt-2 w-40 rounded-md bg-white shadow-md z-50"
+                >
+                    <a
+                        onclick="setLang('en')"
+                        x-on:click="lang = 'en'"
+                        href="#"
+                        class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500"
+                    >
+                        English
+                    </a>
+
+                    <a
+                        onclick="setLang('fr')"
+                        x-on:click="lang = 'fr'"
+                        href="#"
+                        class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500"
+                    >
+                        French
+                    </a>
+
+                    <a
+                        onclick="setLang('ar')"
+                        x-on:click="lang = 'ar'"
+                        href="#"
+                        class="flex items-center gap-2 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-4 py-2.5 text-left text-sm hover:bg-gray-50 disabled:text-gray-500"
+                    >
+                        Arabic
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <main lang="en">
+            <section class="home-banner bg-white dark:bg-gray-900 min-h-screen">
+                <nav
+                    x-data="{ isOpen: false }"
+                    class="container mx-auto px-6 py-2 lg:flex lg:items-center lg:justify-between"
+                >
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <img
+                                src="./assets/logo.png"
+                                alt=""
+                                class="h-9 mr-3 sm:h-24"
+                            />
+                        </div>
+
+                        <!-- Mobile menu button -->
+                        <div class="flex lg:hidden">
+                            <button
+                                x-cloak
+                                @click="isOpen = !isOpen"
+                                type="button"
+                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                aria-label="toggle menu"
+                            >
+                                <svg
+                                    x-show="!isOpen"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M4 8h16M4 16h16"
+                                    />
+                                </svg>
+
+                                <svg
+                                    x-show="isOpen"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+                    <div
+                        x-cloak
+                        :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
+                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:dark:bg-transparent"
+                    >
+                        <div
+                            class="lg:-px-8 flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0"
+                        >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="#"
+                                >Home</a
+                            >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="./store.html"
+                                >Store</a
+                            >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="#about-us"
+                                >About us</a
+                            >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="#"
+                                >Story</a
+                            >
+                        </div>
+
+                        <div class="relative hidden md:block ml-5">
+                            <button
+                                class="absolute inset-y-0 right-0 flex items-center pr-3"
+                                onclick="search('en')"
+                            >
+                                <svg
+                                    class="w-5 h-5 text-gray-400"
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                                <span class="sr-only">Search icon</span>
+                            </button>
+                            <input
+                                type="text"
+                                id="search-navbar-en"
+                                class="block w-50 p-2 pl-3 text-sm text-white placeholder-gray-400 border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Search..."
+                            />
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="mx-auto px-6 py-48 text-center">
+                    <div class="mx-auto max-w-4xl">
+                        <h1 class="text-3xl font-medium text-white lg:text-6xl">
+                            TECHMAA
+                        </h1>
+                        <p class="lg:text-3xl mt-6 text-gray-200">
+                            Drink pure water without any waste
+                        </p>
+                        <a href="./store.html">
+                            <button
+                                class="mt-16 bg-blue-600 px-6 py-2.5 text-center text-sm font-semibold capitalize leading-5 text-white hover:bg-blue-500 focus:outline-none lg:mx-0 lg:w-auto"
+                            >
+                                Go to shop
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div tabindex="0" class="focus:outline-none p-24">
+                    <h1
+                        class="text-center text-3xl font-semibold capitalize text-gray-800 mb-8 dark:text-white lg:text-4xl"
+                    >
+                        OUR PRODUCTS
+                    </h1>
+
+                    <div class="mx-auto container py-8">
+                        <div
+                            class="flex flex-wrap items-center lg:justify-around justify-center"
+                        >
+                            <!-- Card 1 -->
+                            <div
+                                tabindex="0"
+                                class="focus:outline-none mx-2 w-80 xl:mb-0 mb-8 shadow-lg"
+                            >
+                                <div>
+                                    <img
+                                        alt="SWS Water Purifier"
+                                        src="./assets/SWSPurifier/3.jpg"
+                                        tabindex="0"
+                                        class="focus:outline-none w-full h-52"
+                                    />
+                                </div>
+                                <div class="bg-white">
+                                    <div class="p-4">
+                                        <div class="flex items-center">
+                                            <h2
+                                                tabindex="0"
+                                                class="focus:outline-none text-lg font-semibold"
+                                            >
+                                                SWS Water Purifier
+                                            </h2>
+                                        </div>
+                                        <p
+                                            tabindex="0"
+                                            class="focus:outline-none text-xs text-gray-600 mt-2"
+                                        >
+                                            SWS Water Purifier Filter Hi-Tech
+                                            Ceramic Cartridge for Safe, Clean,
+                                            Healthier, Energized Water –
+                                            Drinking & Washing Face, Teeth,
+                                            Fruits, Vegetables & Cooking
+                                        </p>
+                                        <div class="flex mt-4">
+                                            <div>
+                                                <p
+                                                    tabindex="0"
+                                                    class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1"
+                                                >
+                                                    Water Filtration
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex item-center justify-between mt-6"
+                                        >
+                                            <h1
+                                                class="text-gray-700 font-bold text-xl"
+                                            ></h1>
+                                            <a href="./SWSWaterPurifier.html">
+                                                <button
+                                                    class="px-3 py-2 bg-yellow-600 text-white text-xs font-bold uppercase rounded"
+                                                >
+                                                    View Details
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 1 Ends -->
+                            <!-- Card 2 -->
+                            <div
+                                tabindex="0"
+                                class="focus:outline-none mx-2 w-80 xl:mb-0 mb-8 shadow-lg"
+                            >
+                                <div>
+                                    <img
+                                        alt="360 Degree Swivel Faucet"
+                                        src="./assets/SwivelFaucet/1.jpg"
+                                        tabindex="0"
+                                        class="focus:outline-none w-full h-52"
+                                    />
+                                </div>
+                                <div class="bg-white">
+                                    <div class="p-4">
+                                        <div class="flex items-center">
+                                            <h2
+                                                tabindex="0"
+                                                class="focus:outline-none text-lg font-semibold"
+                                            >
+                                                360 Degree Swivel Faucet
+                                            </h2>
+                                        </div>
+                                        <p
+                                            tabindex="0"
+                                            class="focus:outline-none text-xs text-gray-600 mt-2"
+                                        >
+                                            360 Degree Swivel Faucet Kitchen
+                                            Bathroom Basin Water Saving Hand
+                                            Wash Swivel Extension Faucet Shower
+                                            Head Faucet Aerator
+                                        </p>
+                                        <div class="flex mt-4">
+                                            <div>
+                                                <p
+                                                    tabindex="0"
+                                                    class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1"
+                                                >
+                                                    Water Saver
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex item-center justify-between mt-6"
+                                        >
+                                            <h1
+                                                class="text-gray-700 font-bold text-xl"
+                                            ></h1>
+                                            <a
+                                                href="./360DegreeSwivelFaucet.html"
+                                            >
+                                                <button
+                                                    class="px-3 py-2 bg-yellow-600 text-white text-xs font-bold uppercase rounded"
+                                                >
+                                                    View Details
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2 Ends -->
+
+                            <!-- Card 3 -->
+                            <div
+                                tabindex="0"
+                                class="focus:outline-none mx-2 w-80 xl:mb-0 mb-8 shadow-lg"
+                            >
+                                <div>
+                                    <img
+                                        alt="person capturing an image"
+                                        src="./assets/TanklessHeater/1.jpg"
+                                        tabindex="0"
+                                        class="focus:outline-none w-full h-52"
+                                    />
+                                </div>
+                                <div class="bg-white">
+                                    <div class="p-4">
+                                        <div class="flex items-center">
+                                            <h2
+                                                tabindex="0"
+                                                class="focus:outline-none text-lg font-semibold"
+                                            >
+                                                Tankless Instant Electric Water
+                                                Heater Faucet
+                                            </h2>
+                                        </div>
+                                        <p
+                                            tabindex="0"
+                                            class="focus:outline-none text-xs text-gray-600 mt-2"
+                                        >
+                                            Tankless Instant Electric Water
+                                            Heater Faucet, Kitchen, Hot or Cold
+                                            Water
+                                        </p>
+                                        <div class="flex mt-4">
+                                            <div>
+                                                <p
+                                                    tabindex="0"
+                                                    class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1"
+                                                >
+                                                    Water Heater
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex item-center justify-between mt-6"
+                                        >
+                                            <h1
+                                                class="text-gray-700 font-bold text-xl"
+                                            ></h1>
+                                            <a
+                                                href="./TanklessInstantElectricWaterHeaterFaucet.html"
+                                            >
+                                                <button
+                                                    class="px-3 py-2 bg-yellow-600 text-white text-xs font-bold uppercase rounded"
+                                                >
+                                                    View Details
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3 Ends -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section
+                id="about-us"
+                class="about-us bg-gray-100 min-h-screen flex flex-col place-content-center dark:bg-gray-800"
+            >
+                <h1
+                    class="text-center mt-8 text-3xl font-semibold capitalize text-gray-100 dark:text-white lg:text-4xl"
+                >
+                    ABOUT US
+                </h1>
+
+                <div class="container mx-auto px-6 pb-32 pt-16">
+                    <div
+                        class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-16 xl:grid-cols-3"
+                    >
+                        <div
+                            class="flex flex-col items-center rounded-xl p-4 dark:border-gray-700 sm:p-12"
+                        >
+                            <img
+                                class="aspect-square w-full rounded-xl object-cover"
+                                src="./assets/logo.png"
+                                alt=""
+                            />
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center justify-center col-span-2 pb-10"
+                        >
+                            <h1
+                                class="my-6 text-center leading-relaxed text-3xl font-semibold text-gray-100 dark:text-white"
+                            >
+                                We are a store specializing in water products,
+                                especially in domestic and agriculture domains.
+                            </h1>
+                            <p
+                                class="text-center text-lg leading-relaxed text-gray-300 mx-8"
+                            >
+                                Our goal is to conserve water and make it a
+                                sustainable resource with the right quality, by
+                                providing to our customers with a wide range of
+                                products that save and purify water at an
+                                affordable cost.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white dark:bg-gray-900">
+                <div class="container mx-auto max-w-4xl px-6 py-24">
+                    <h1
+                        class="text-center text-4xl font-semibold text-gray-800 dark:text-white"
+                    >
+                        Frequently asked questions
+                    </h1>
+
+                    <div class="mt-12 space-y-8">
+                        <div
+                            class="rounded-lg border-2 border-gray-100 dark:border-gray-700"
+                        >
+                            <button
+                                class="flex w-full items-center justify-between p-8"
+                            >
+                                <h1
+                                    class="font-semibold text-gray-700 dark:text-white"
+                                >
+                                    How can I place a order ?
+                                </h1>
+
+                                <span
+                                    class="rounded-full bg-blue-500 text-white"
+                                    onclick="faq(event)"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                        />
+                                    </svg>
+                                </span>
+                                <span
+                                    class="hidden rounded-full bg-gray-200 text-gray-400"
+                                    onclick="faq(event)"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M18 12H6"
+                                        />
+                                    </svg>
+                                </span>
+                            </button>
+
+                            <hr
+                                class="hidden border-gray-200 dark:border-gray-700"
+                            />
+
+                            <p
+                                class="hidden p-8 text-sm text-gray-500 dark:text-gray-300"
+                            >
+                                You have to fill the form. We will reach out to
+                                you for more information and then will ship your
+                                product.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flex justify-center bg-gray-200">
+                <div class="container py-16">
+                    <h1
+                        class="text-center text-3xl font-semibold tracking-tight text-gray-800 dark:text-white md:mx-3 xl:text-3xl"
+                    >
+                        Sign up for exclusive offers and get 10% off on your
+                        first order.
+                    </h1>
+
+                    <form class="my-12 mx-24 flex">
+                        <input
+                            type="email"
+                            placeholder="Your Email"
+                            class="w-full rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-800 focus:border-gray-700 focus:ring-0 bg-white"
+                        />
+                        <a
+                            href="#"
+                            class="inline-flex items-center justify-center rounded-r-lg bg-gray-800 px-4 py-2 text-sm text-white duration-300 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80"
+                        >
+                            Subscribe
+                        </a>
+                    </form>
+                </div>
+            </section>
+
+            <footer class="bg-white dark:bg-gray-900">
+                <div class="container mx-auto px-6 py-16">
+                    <hr
+                        class="mb-6 border-gray-200 dark:border-gray-700 md:mb-10"
+                    />
+
+                    <div
+                        class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+                    >
+                        <div class="col-span-2 pt-5">
+                            <a
+                                href="#"
+                                class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                                >TECHMAA</a
+                            >
+                            <p class="mt-5 text-gray-700">
+                                Drink pure water without any waste
+                            </p>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Quick Link
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Home</a
+                                >
+                                <a
+                                    href="./store.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Products</a
+                                >
+                                <a
+                                    href="#about-us"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >About us</a
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Products
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="./SWSWaterPurifier.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >SWS Water Purifier</a
+                                >
+                                <a
+                                    href="./360DegreeSwivelFaucet.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >360 Degree Swivel Faucet</a
+                                >
+                                <a
+                                    href="./TanklessInstantElectricWaterHeaterFaucet.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Tankless Instant Electric Water Heater
+                                    Faucet</a
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Contact Us
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="tel:+212763560046"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >+212763560046</a
+                                >
+                                <a
+                                    href="mailto:contacttechmaa@gmail.com"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >contacttechmaa@gmail.com</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr
+                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
+                    />
+
+                    <div
+                        class="flex flex-col items-center justify-between sm:flex-row"
+                    >
+                        <p
+                            class="mt-4 text-sm text-gray-500 dark:text-gray-300 sm:mt-0"
+                        >
+                            © Copyright 2022. All Rights Reserved.
+                        </p>
+
+                        <div
+                            class="flex mt-4 space-x-6 sm:justify-center sm:mt-0"
+                        >
+                            <a
+                                href="https://bit.ly/TechMaafb"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                <span class="sr-only">Facebook page</span>
+                            </a>
+                            <a
+                                href="https://bit.ly/TechMaaInstagram"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                <span class="sr-only">Instagram page</span>
+                            </a>
+                            <a
+                                href="https://bit.ly/TechmaaStore"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    viewBox="0 0 32 32"
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d=" M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.478-1.318.13-.33.244-.73.244-1.088 0-.058 0-.144-.03-.215-.1-.172-2.434-1.39-2.678-1.39zm-2.908 7.593c-1.747 0-3.48-.53-4.942-1.49L7.793 24.41l1.132-3.337a8.955 8.955 0 0 1-1.72-5.272c0-4.955 4.04-8.995 8.997-8.995S25.2 10.845 25.2 15.8c0 4.958-4.04 8.998-8.998 8.998zm0-19.798c-5.96 0-10.8 4.842-10.8 10.8 0 1.964.53 3.898 1.546 5.574L5 27.176l5.974-1.92a10.807 10.807 0 0 0 16.03-9.455c0-5.958-4.842-10.8-10.802-10.8z"
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                                <span class="sr-only">Whatsapp page</span>
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/company/tech-maa/"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    viewBox="0 0 512 512"
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+                                    />
+                                </svg>
+                                <span class="sr-only">LinkedIn page</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <main lang="fr" class="hidden">
+            <section class="home-banner bg-white dark:bg-gray-900 min-h-screen">
+                <nav
+                    x-data="{ isOpen: false }"
+                    class="container mx-auto px-6 py-2 lg:flex lg:items-center lg:justify-between"
+                >
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <img
+                                src="./assets/logo.png"
+                                alt=""
+                                class="h-9 mr-3 sm:h-24"
+                            />
+                        </div>
+
+                        <!-- Mobile menu button -->
+                        <div class="flex lg:hidden">
+                            <button
+                                x-cloak
+                                @click="isOpen = !isOpen"
+                                type="button"
+                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                aria-label="toggle menu"
+                            >
+                                <svg
+                                    x-show="!isOpen"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M4 8h16M4 16h16"
+                                    />
+                                </svg>
+
+                                <svg
+                                    x-show="isOpen"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+                    <div
+                        x-cloak
+                        :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
+                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:dark:bg-transparent"
+                    >
+                        <div
+                            class="lg:-px-8 flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0"
+                        >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="#"
+                                >ACCUEIL</a
+                            >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="./store.html"
+                                >Boutique</a
+                            >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="#À propos de nous"
+                                >À propos de nous</a
+                            >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="#"
+                                >Histoire</a
+                            >
+                        </div>
+
+                        <div class="relative hidden md:block ml-5">
+                            <button
+                                class="absolute inset-y-0 right-0 flex items-center pr-3"
+                                onclick="search('fr')"
+                            >
+                                <svg
+                                    class="w-5 h-5 text-gray-400"
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                                <span class="sr-only">Search icon</span>
+                            </button>
+                            <input
+                                type="text"
+                                id="search-navbar-fr"
+                                class="block w-50 p-2 pl-3 text-sm text-white placeholder-gray-400 border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Chercher..."
+                            />
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="mx-auto px-6 py-48 text-center">
+                    <div class="mx-auto max-w-4xl">
+                        <h1 class="text-3xl font-medium text-white lg:text-6xl">
+                            TECHMAA
+                        </h1>
+                        <p class="lg:text-3xl mt-6 text-gray-200">
+                            Buvez de l'eau pure sans aucun gaspillage
+                        </p>
+                        <a href="./store.html">
+                            <button
+                                class="mt-16 bg-blue-600 px-6 py-2.5 text-center text-sm font-semibold capitalize leading-5 text-white hover:bg-blue-500 focus:outline-none lg:mx-0 lg:w-auto"
+                            >
+                                Aller à la boutique
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div tabindex="0" class="focus:outline-none p-24">
+                    <h1
+                        class="text-center text-3xl font-semibold capitalize text-gray-800 mb-8 dark:text-white lg:text-4xl"
+                    >
+                        NOS PRODUITS
+                    </h1>
+
+                    <div class="mx-auto container py-8">
+                        <div
+                            class="flex flex-wrap items-center lg:justify-around justify-center"
+                        >
+                            <!-- Card 1 -->
+                            <div
+                                tabindex="0"
+                                class="focus:outline-none mx-2 w-80 xl:mb-0 mb-8 shadow-lg"
+                            >
+                                <div>
+                                    <img
+                                        alt="person capturing an image"
+                                        src="./assets/SWSPurifier/3.jpg"
+                                        tabindex="0"
+                                        class="focus:outline-none w-full h-52"
+                                    />
+                                </div>
+                                <div class="bg-white">
+                                    <div class="p-4">
+                                        <div class="flex items-center">
+                                            <h2
+                                                tabindex="0"
+                                                class="focus:outline-none text-lg font-semibold"
+                                            >
+                                                Purificateur d'eau SWS
+                                            </h2>
+                                        </div>
+                                        <p
+                                            tabindex="0"
+                                            class="focus:outline-none text-xs text-gray-600 mt-2"
+                                        >
+                                            Filtre purificateur d'eau SWS
+                                            Hi-Tech Cartouche en céramique pour
+                                            sûr, propre, Une eau plus saine et
+                                            énergisée – Boire et laver le
+                                            visage, les dents, Fruits, Légumes &
+                                            Cuisine
+                                        </p>
+                                        <div class="flex mt-4">
+                                            <div>
+                                                <p
+                                                    tabindex="0"
+                                                    class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1"
+                                                >
+                                                    Filtration de l'eau
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex item-center justify-between mt-6"
+                                        >
+                                            <h1
+                                                class="text-gray-700 font-bold text-xl"
+                                            ></h1>
+                                            <a href="./SWSWaterPurifier.html">
+                                                <button
+                                                    class="px-3 py-2 bg-yellow-600 text-white text-xs font-bold uppercase rounded"
+                                                >
+                                                    Voir les détails
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 1 Ends -->
+                            <!-- Card 2 -->
+                            <div
+                                tabindex="0"
+                                class="focus:outline-none mx-2 w-80 xl:mb-0 mb-8 shadow-lg"
+                            >
+                                <div>
+                                    <img
+                                        alt="person capturing an image"
+                                        src="./assets/SwivelFaucet/1.jpg"
+                                        tabindex="0"
+                                        class="focus:outline-none w-full h-52"
+                                    />
+                                </div>
+                                <div class="bg-white">
+                                    <div class="p-4">
+                                        <div class="flex items-center">
+                                            <h2
+                                                tabindex="0"
+                                                class="focus:outline-none text-lg font-semibold"
+                                            >
+                                                Robinet pivotant à 360 degrés
+                                            </h2>
+                                        </div>
+                                        <p
+                                            tabindex="0"
+                                            class="focus:outline-none text-xs text-gray-600 mt-2"
+                                        >
+                                            360 Degrés Pivotant Robinet Cuisine
+                                            Salle De Bains Bassin Économie D'eau
+                                            Lavage À La Main Pivotant Extension
+                                            Robinet Pommeau De Douche Robinet
+                                            Aérateur
+                                        </p>
+                                        <div class="flex mt-4">
+                                            <div>
+                                                <p
+                                                    tabindex="0"
+                                                    class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1"
+                                                >
+                                                    Économiseur d'eau
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex item-center justify-between mt-6"
+                                        >
+                                            <h1
+                                                class="text-gray-700 font-bold text-xl"
+                                            ></h1>
+                                            <a
+                                                href="./360DegreeSwivelFaucet.html"
+                                            >
+                                                <button
+                                                    class="px-3 py-2 bg-yellow-600 text-white text-xs font-bold uppercase rounded"
+                                                >
+                                                    Voir les détails
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2 Ends -->
+
+                            <!-- Card 3 -->
+                            <div
+                                tabindex="0"
+                                class="focus:outline-none mx-2 w-80 xl:mb-0 mb-8 shadow-lg"
+                            >
+                                <div>
+                                    <img
+                                        alt="person capturing an image"
+                                        src="./assets/TanklessHeater/1.jpg"
+                                        tabindex="0"
+                                        class="focus:outline-none w-full h-52"
+                                    />
+                                </div>
+                                <div class="bg-white">
+                                    <div class="p-4">
+                                        <div class="flex items-center">
+                                            <h2
+                                                tabindex="0"
+                                                class="focus:outline-none text-lg font-semibold"
+                                            >
+                                                Robinet de chauffe-eau
+                                                électrique instantané sans
+                                                réservoir
+                                            </h2>
+                                        </div>
+                                        <p
+                                            tabindex="0"
+                                            class="focus:outline-none text-xs text-gray-600 mt-2"
+                                        >
+                                            Robinet de chauffe-eau électrique
+                                            instantané sans réservoir, cuisine,
+                                            eau chaude ou froide
+                                        </p>
+                                        <div class="flex mt-4">
+                                            <div>
+                                                <p
+                                                    tabindex="0"
+                                                    class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1"
+                                                >
+                                                    Chauffe-eau
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex item-center justify-between mt-6"
+                                        >
+                                            <h1
+                                                class="text-gray-700 font-bold text-xl"
+                                            ></h1>
+                                            <a
+                                                href="./TanklessInstantElectricWaterHeaterFaucet.html"
+                                            >
+                                                <button
+                                                    class="px-3 py-2 bg-yellow-600 text-white text-xs font-bold uppercase rounded"
+                                                >
+                                                    Voir les détails
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3 Ends -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section
+                id="À propos de nous"
+                class="about-us bg-gray-100 min-h-screen flex flex-col place-content-center dark:bg-gray-800"
+            >
+                <h1
+                    class="text-center mt-8 text-3xl font-semibold capitalize text-gray-100 dark:text-white lg:text-4xl"
+                >
+                    À PROPOS DE NOUS
+                </h1>
+
+                <div class="container mx-auto px-6 pb-32 pt-16">
+                    <div
+                        class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-16 xl:grid-cols-3"
+                    >
+                        <div
+                            class="flex flex-col items-center rounded-xl p-4 dark:border-gray-700 sm:p-12"
+                        >
+                            <img
+                                class="aspect-square w-full rounded-xl object-cover"
+                                src="./assets/logo.png"
+                                alt=""
+                            />
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center justify-center col-span-2 pb-10"
+                        >
+                            <h1
+                                class="my-6 text-center leading-relaxed text-3xl font-semibold text-gray-100 dark:text-white"
+                            >
+                                Nous sommes un Boutique spécialisé dans les
+                                produits d'eau, notamment dans les domaines
+                                domestique et agricole.
+                            </h1>
+                            <p
+                                class="text-center text-lg leading-relaxed text-gray-300 mx-8"
+                            >
+                                Notre objectif est de conserver l'eau et d'en
+                                faire un ressource durable avec la bonne
+                                qualité, en offrir à nos clients une large gamme
+                                de des produits qui économisent et purifient
+                                l'eau à un coût abordable.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white dark:bg-gray-900">
+                <div class="container mx-auto max-w-4xl px-6 py-24">
+                    <h1
+                        class="text-center text-4xl font-semibold text-gray-800 dark:text-white"
+                    >
+                        Questions fréquemment posées
+                    </h1>
+
+                    <div class="mt-12 space-y-8">
+                        <div
+                            class="rounded-lg border-2 border-gray-100 dark:border-gray-700"
+                        >
+                            <button
+                                class="flex w-full items-center justify-between p-8"
+                            >
+                                <h1
+                                    class="font-semibold text-gray-700 dark:text-white"
+                                >
+                                    Comment puis-je passer une commande ?
+                                </h1>
+
+                                <span
+                                    class="rounded-full bg-blue-500 text-white"
+                                    onclick="faq(event)"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                        />
+                                    </svg>
+                                </span>
+                                <span
+                                    class="hidden rounded-full bg-gray-200 text-gray-400"
+                                    onclick="faq(event)"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M18 12H6"
+                                        />
+                                    </svg>
+                                </span>
+                            </button>
+
+                            <hr
+                                class="hidden border-gray-200 dark:border-gray-700"
+                            />
+
+                            <p
+                                class="hidden p-8 text-sm text-gray-500 dark:text-gray-300"
+                            >
+                                Vous devez remplir le formulaire. Nous allons
+                                tendre la main à vous pour plus d'informations
+                                et vous enverra ensuite votre produit.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flex justify-center bg-gray-200">
+                <div class="container py-16">
+                    <h1
+                        class="text-center text-3xl font-semibold tracking-tight text-gray-800 dark:text-white md:mx-3 xl:text-3xl"
+                    >
+                        Inscrivez-vous pour des offres exclusives et obtenez 10%
+                        de réduction sur votre Premier ordre.
+                    </h1>
+
+                    <form class="my-12 mx-24 flex">
+                        <input
+                            type="email"
+                            placeholder="Your Email"
+                            class="w-full rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-800 focus:border-gray-700 focus:ring-0 bg-white"
+                        />
+                        <a
+                            href="#"
+                            class="inline-flex items-center justify-center rounded-r-lg bg-gray-800 px-4 py-2 text-sm text-white duration-300 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80"
+                        >
+                            S'abonner
+                        </a>
+                    </form>
+                </div>
+            </section>
+
+            <footer class="bg-white dark:bg-gray-900">
+                <div class="container mx-auto px-6 py-16">
+                    <hr
+                        class="mb-6 border-gray-200 dark:border-gray-700 md:mb-10"
+                    />
+
+                    <div
+                        class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+                    >
+                        <div class="col-span-2 pt-5">
+                            <a
+                                href="#"
+                                class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                                >TECHMAA</a
+                            >
+                            <p class="mt-5 text-gray-700">
+                                Buvez de l'eau pure sans aucun gaspillage
+                            </p>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Lien rapide
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >ACCUEIL</a
+                                >
+                                <a
+                                    href="./store.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Des produits</a
+                                >
+                                <a
+                                    href="#À propos de nous"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >À propos de nous</a
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Des produits
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="./SWSWaterPurifier.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Purificateur d'eau SWS</a
+                                >
+                                <a
+                                    href="./360DegreeSwivelFaucet.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Robinet pivotant à 360 degrés</a
+                                >
+                                <a
+                                    href="./TanklessInstantElectricWaterHeaterFaucet.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >Robinet de chauffe-eau électrique
+                                    instantané sans réservoir</a
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                Nous contacter
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >+212763560046</a
+                                >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >contacttechmaa@gmail.com</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr
+                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
+                    />
+
+                    <div
+                        class="flex flex-col items-center justify-between sm:flex-row"
+                    >
+                        <p
+                            class="mt-4 text-sm text-gray-500 dark:text-gray-300 sm:mt-0"
+                        >
+                            © Copyright 2022. Tous droits réservés.
+                        </p>
+
+                        <div
+                            class="flex mt-4 space-x-6 sm:justify-center sm:mt-0"
+                        >
+                            <a
+                                href="https://bit.ly/TechMaafb"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                <span class="sr-only">Facebook page</span>
+                            </a>
+                            <a
+                                href="https://bit.ly/TechMaaInstagram"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                <span class="sr-only">Instagram page</span>
+                            </a>
+                            <a
+                                href="https://bit.ly/TechmaaStore"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    viewBox="0 0 32 32"
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d=" M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.478-1.318.13-.33.244-.73.244-1.088 0-.058 0-.144-.03-.215-.1-.172-2.434-1.39-2.678-1.39zm-2.908 7.593c-1.747 0-3.48-.53-4.942-1.49L7.793 24.41l1.132-3.337a8.955 8.955 0 0 1-1.72-5.272c0-4.955 4.04-8.995 8.997-8.995S25.2 10.845 25.2 15.8c0 4.958-4.04 8.998-8.998 8.998zm0-19.798c-5.96 0-10.8 4.842-10.8 10.8 0 1.964.53 3.898 1.546 5.574L5 27.176l5.974-1.92a10.807 10.807 0 0 0 16.03-9.455c0-5.958-4.842-10.8-10.802-10.8z"
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                                <span class="sr-only">Whatsapp page</span>
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/company/tech-maa/"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    viewBox="0 0 512 512"
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+                                    />
+                                </svg>
+                                <span class="sr-only">LinkedIn page</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <main lang="ar" class="hidden">
+            <section class="home-banner bg-white dark:bg-gray-900 min-h-screen">
+                <nav
+                    x-data="{ isOpen: false }"
+                    class="container mx-auto px-6 py-2 lg:flex lg:items-center lg:justify-between"
+                >
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <img
+                                src="./assets/logo.png"
+                                alt=""
+                                class="h-9 mr-3 sm:h-24"
+                            />
+                        </div>
+
+                        <!-- Mobile menu button -->
+                        <div class="flex lg:hidden">
+                            <button
+                                x-cloak
+                                @click="isOpen = !isOpen"
+                                type="button"
+                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                aria-label="toggle menu"
+                            >
+                                <svg
+                                    x-show="!isOpen"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M4 8h16M4 16h16"
+                                    />
+                                </svg>
+
+                                <svg
+                                    x-show="isOpen"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+                    <div
+                        x-cloak
+                        :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
+                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:dark:bg-transparent"
+                    >
+                        <div
+                            class="lg:-px-8 flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0"
+                        >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="#"
+                                >الرئيسية</a
+                            >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="./store.html"
+                                >المتجر</a
+                            >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="#عنا"
+                                >عنا</a
+                            >
+                            <a
+                                class="transform text-gray-200 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                href="#"
+                                >ابحث</a
+                            >
+                        </div>
+
+                        <div class="relative hidden md:block ml-5">
+                            <button
+                                class="absolute inset-y-0 right-0 flex items-center pr-3"
+                                onclick="search('ar')"
+                            >
+                                <svg
+                                    class="w-5 h-5 text-gray-400"
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                                <span class="sr-only">Search icon</span>
+                            </button>
+                            <input
+                                type="text"
+                                id="search-navbar-ar"
+                                class="block w-50 p-2 pl-3 text-sm text-white placeholder-gray-400 border border-gray-600 rounded-lg bg-gray-700 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="ابحث..."
+                            />
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="mx-auto px-6 py-48 text-center">
+                    <div class="mx-auto max-w-4xl">
+                        <h1 class="text-3xl font-medium text-white lg:text-6xl">
+                            تيكما
+                        </h1>
+                        <p class="lg:text-3xl mt-6 text-gray-200">
+                            اشرب الماء النقي بدون أي هدر
+                        </p>
+                        <a href="#محل">
+                            <button
+                                class="mt-16 bg-blue-600 px-6 py-2.5 text-center text-sm font-semibold capitalize leading-5 text-white hover:bg-blue-500 focus:outline-none lg:mx-0 lg:w-auto"
+                            >
+                                ت سوق اآلن
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div tabindex="0" class="focus:outline-none p-24">
+                    <h1
+                        class="text-center text-3xl font-semibold capitalize text-gray-800 mb-8 dark:text-white lg:text-4xl"
+                    >
+                        افضل منتجاتنا
+                    </h1>
+
+                    <div class="mx-auto container py-8">
+                        <div
+                            class="flex flex-wrap items-center lg:justify-around justify-center"
+                        >
+                            <!-- Card 1 -->
+                            <div
+                                tabindex="0"
+                                class="focus:outline-none mx-2 w-80 xl:mb-0 mb-8 shadow-lg"
+                            >
+                                <div>
+                                    <img
+                                        alt="SWS Water Purifier"
+                                        src="./assets/SWSPurifier/3.jpg"
+                                        tabindex="0"
+                                        class="focus:outline-none w-full h-52"
+                                    />
+                                </div>
+                                <div class="bg-white">
+                                    <div class="p-4">
+                                        <div class="flex items-center">
+                                            <h2
+                                                tabindex="0"
+                                                class="focus:outline-none text-lg font-semibold"
+                                            >
+                                                SWS جهاز تصفية و تنقية المياه من
+                                                5 طبقات للمنزل والمطبخ
+                                            </h2>
+                                        </div>
+                                        <p
+                                            tabindex="0"
+                                            class="focus:outline-none text-xs text-gray-600 mt-2"
+                                        >
+                                            فلتر ممتاز و جودة عالية، في أحدث
+                                            تكنولوجيا لتنقية الماء، يتكون من 5
+                                            مراحل لتنقية الماء من الصدأ،
+                                            .الشوائب، الرمال، الكلور، كما يقوم
+                                            بإمتصاص الروائح الكريهة
+                                        </p>
+                                        <div class="flex mt-4">
+                                            <div>
+                                                <p
+                                                    tabindex="0"
+                                                    class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1"
+                                                >
+                                                    تنقية المياه
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex item-center justify-between mt-6"
+                                        >
+                                            <h1
+                                                class="text-gray-700 font-bold text-xl"
+                                            ></h1>
+                                            <a href="./SWSWaterPurifier.html">
+                                                <button
+                                                    class="px-3 py-2 bg-yellow-600 text-white text-xs font-bold uppercase rounded"
+                                                >
+                                                    التفاصيل
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 1 Ends -->
+                            <!-- Card 2 -->
+                            <div
+                                tabindex="0"
+                                class="focus:outline-none mx-2 w-80 xl:mb-0 mb-8 shadow-lg"
+                            >
+                                <div>
+                                    <img
+                                        alt="360 Degree Swivel Faucet"
+                                        src="./assets/SwivelFaucet/1.jpg"
+                                        tabindex="0"
+                                        class="focus:outline-none w-full h-52"
+                                    />
+                                </div>
+                                <div class="bg-white">
+                                    <div class="p-4">
+                                        <div class="flex items-center">
+                                            <h2
+                                                tabindex="0"
+                                                class="focus:outline-none text-lg font-semibold"
+                                            >
+                                                فلتر الماء الدوار 360 المتطور
+                                                لتنقية ماء الصنبور وتوفير المياه
+                                                أداة غسل يدوية دوارة- تمديد
+                                                الصنبور
+                                            </h2>
+                                        </div>
+                                        <p
+                                            tabindex="0"
+                                            class="focus:outline-none text-xs text-gray-600 mt-2"
+                                        >
+                                            يمكن تثبيت فلتر الماء الدوار 360 على
+                                            الصنبور الخاص بك لتصفية وتنظيم تدفق
+                                            المياه، مما قد يجعل .مطبخك أو صنبور
+                                            حمامك أكثر فاعلية ومرونة
+                                        </p>
+                                        <div class="flex mt-4">
+                                            <div>
+                                                <p
+                                                    tabindex="0"
+                                                    class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1"
+                                                >
+                                                    توفير المياه
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex item-center justify-between mt-6"
+                                        >
+                                            <h1
+                                                class="text-gray-700 font-bold text-xl"
+                                            ></h1>
+                                            <a
+                                                href="./360DegreeSwivelFaucet.html"
+                                            >
+                                                <button
+                                                    class="px-3 py-2 bg-yellow-600 text-white text-xs font-bold uppercase rounded"
+                                                >
+                                                    التفاصيل
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2 Ends -->
+
+                            <!-- Card 3 -->
+                            <div
+                                tabindex="0"
+                                class="focus:outline-none mx-2 w-80 xl:mb-0 mb-8 shadow-lg"
+                            >
+                                <div>
+                                    <img
+                                        alt="person capturing an image"
+                                        src="./assets/TanklessHeater/1.jpg"
+                                        tabindex="0"
+                                        class="focus:outline-none w-full h-52"
+                                    />
+                                </div>
+                                <div class="bg-white">
+                                    <div class="p-4">
+                                        <div class="flex items-center">
+                                            <h2
+                                                tabindex="0"
+                                                class="focus:outline-none text-lg font-semibold"
+                                            >
+                                                سخان مياه كهربائي فوري بدون
+                                                خزان، للمطبخ والحمام
+                                            </h2>
+                                        </div>
+                                        <p
+                                            tabindex="0"
+                                            class="focus:outline-none text-xs text-gray-600 mt-2"
+                                        >
+                                            يوفر سخان مياه كهربائي مزيج من الماء
+                                            البارد والساخن، يتم التحكم فيه
+                                            بواسطة زرين يتميز بمقاومة درجات
+                                            الحرارة العالية، ومقاومة التآكل
+                                            ومقاومة التآكل العالية وسهل التركيب
+                                            والتنظيف
+                                        </p>
+                                        <div class="flex mt-4">
+                                            <div>
+                                                <p
+                                                    tabindex="0"
+                                                    class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1"
+                                                >
+                                                    سخان الماء
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex item-center justify-between mt-6"
+                                        >
+                                            <h1
+                                                class="text-gray-700 font-bold text-xl"
+                                            ></h1>
+                                            <a
+                                                href="./TanklessInstantElectricWaterHeaterFaucet.html"
+                                            >
+                                                <button
+                                                    class="px-3 py-2 bg-yellow-600 text-white text-xs font-bold uppercase rounded"
+                                                >
+                                                    التفاصيل
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3 Ends -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section
+                id="عنا"
+                class="about-us bg-gray-100 min-h-screen flex flex-col place-content-center dark:bg-gray-800"
+            >
+                <h1
+                    class="text-center mt-8 text-3xl font-semibold capitalize text-gray-100 dark:text-white lg:text-4xl"
+                >
+                    من نحن؟
+                </h1>
+
+                <div class="container mx-auto px-6 pb-32 pt-16">
+                    <div
+                        class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 xl:mt-16 xl:grid-cols-3"
+                    >
+                        <div
+                            class="flex flex-col items-center rounded-xl p-4 dark:border-gray-700 sm:p-12"
+                        >
+                            <img
+                                class="aspect-square w-full rounded-xl object-cover"
+                                src="./assets/logo.png"
+                                alt=""
+                            />
+                        </div>
+
+                        <div
+                            class="flex flex-col items-center justify-center col-span-2 pb-10"
+                        >
+                            <h1
+                                class="my-6 text-center leading-relaxed text-3xl font-semibold text-gray-100 dark:text-white"
+                            >
+                                نحن شركة رائدة ومتخصصة في بيع المنتجات المائية
+                                خاصة في المجاالت المنزلية والزراعية في .المغرب،
+                                مع الحمض النووي األفريقي
+                            </h1>
+                            <p
+                                class="text-center text-lg leading-relaxed text-gray-300 mx-8"
+                            >
+                                نحن نقدم مجموعة واسعة من فئات مختلفة من المنتجات
+                                مثل منتجات المياه الذكية ومنتجات إدارة المياه
+                                ومنتجات تنقية المياه ومستلزمات المياه ... إضافةً
+                                إلدارة وحفظ إلى ذلك، نعمل على توعية الناس بواسطة
+                                تزويد المجتمع بمعلومات قيمة ونصائح .مواردهم
+                                المائية
+                                <br />
+                                هدفنا هو الحفاظ على المياه وجعلها موردًا مستدا
+                                ًما بالجودة المناسبة، بواسطة تزويد عمالئنا
+                                بمجموعة واسعة من المنتجات التي .توفر المياه
+                                وتنقيها بتكلفة معقولة
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white dark:bg-gray-900">
+                <div class="container mx-auto max-w-4xl px-6 py-24">
+                    <h1
+                        class="text-center text-4xl font-semibold text-gray-800 dark:text-white"
+                    >
+                        شائعة أ
+                    </h1>
+
+                    <div class="mt-12 space-y-8">
+                        <div
+                            class="rounded-lg border-2 border-gray-100 dark:border-gray-700"
+                        >
+                            <button
+                                class="flex w-full items-center justify-between p-8"
+                            >
+                                <h1
+                                    class="font-semibold text-gray-700 dark:text-white"
+                                >
+                                    منتج؟ طلب يمكنني ك
+                                </h1>
+
+                                <span
+                                    class="rounded-full bg-blue-500 text-white"
+                                    onclick="faq(event)"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                        />
+                                    </svg>
+                                </span>
+                                <span
+                                    class="hidden rounded-full bg-gray-200 text-gray-400"
+                                    onclick="faq(event)"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M18 12H6"
+                                        />
+                                    </svg>
+                                </span>
+                            </button>
+
+                            <hr
+                                class="hidden border-gray-200 dark:border-gray-700"
+                            />
+
+                            <p
+                                class="hidden p-8 text-sm text-gray-500 dark:text-gray-300"
+                            >
+                                يجب عليك ملء النموذج. سوف نتواصل مع أنت لمزيد من
+                                المعلومات ومن ثم سوف تقوم بشحن منتج
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flex justify-center bg-gray-200">
+                <div class="container py-16">
+                    <h1
+                        class="text-center text-3xl font-semibold tracking-tight text-gray-800 dark:text-white md:mx-3 xl:text-3xl"
+                    >
+                        سجل للحصول على عروض حصرية واحصل على خصم 10 ٪على طلبك
+                        األول
+                    </h1>
+
+                    <form class="my-12 mx-24 flex">
+                        <input
+                            type="email"
+                            placeholder="اكتب بريدك االلكتروني هنا"
+                            class="w-full rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-800 focus:border-gray-700 focus:ring-0 bg-white"
+                        />
+                        <a
+                            href="#"
+                            class="inline-flex items-center justify-center rounded-r-lg bg-gray-800 px-4 py-2 text-sm text-white duration-300 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80"
+                        >
+                            اشترك اآلن
+                        </a>
+                    </form>
+                </div>
+            </section>
+
+            <footer class="bg-white dark:bg-gray-900">
+                <div class="container mx-auto px-6 py-16">
+                    <hr
+                        class="mb-6 border-gray-200 dark:border-gray-700 md:mb-10"
+                    />
+
+                    <div
+                        class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+                    >
+                        <div class="col-span-2 pt-5">
+                            <a
+                                href="#"
+                                class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                                >تيكما</a
+                            >
+                            <p class="mt-5 text-gray-700">
+                                اشرب الماء النقي بدون أي هدر
+                            </p>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                تنقل بسرعة
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >الرئيسية</a
+                                >
+                                <a
+                                    href="./store.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >منتجاتنا</a
+                                >
+                                <a
+                                    href="#عنا"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >عنا</a
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                افضل المنتجات
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="./SWSWaterPurifier.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >SWS جهاز تصفية و تنقية المياه من 5 طبقات
+                                    للمنزل والمطبخ</a
+                                >
+                                <a
+                                    href="./360DegreeSwivelFaucet.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >فلتر الماء الدوار 360 المتطور لتنقية ماء
+                                    الصنبور وتوفير المياه أداة غسل يدوية دوارة-
+                                    تمديد الصنبور</a
+                                >
+                                <a
+                                    href="./TanklessInstantElectricWaterHeaterFaucet.html"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >سخان مياه كهربائي فوري بدون خزان، للمطبخ
+                                    والحمام</a
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="font-semibold text-gray-800 dark:text-white"
+                            >
+                                تواصل معنا
+                            </p>
+
+                            <div
+                                class="mt-5 flex flex-col items-start space-y-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >+212763560046</a
+                                >
+                                <a
+                                    href="#"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    >contacttechmaa@gmail.com</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr
+                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
+                    />
+
+                    <div
+                        class="flex flex-col items-center justify-between sm:flex-row"
+                    >
+                        <p
+                            class="mt-4 text-sm text-gray-500 dark:text-gray-300 sm:mt-0"
+                        >
+                            © حقوق الطبع والنشر 2022. جميع الحقوق محفوظة.
+                        </p>
+
+                        <div
+                            class="flex mt-4 space-x-6 sm:justify-center sm:mt-0"
+                        >
+                            <a
+                                href="https://bit.ly/TechMaafb"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                <span class="sr-only">Facebook page</span>
+                            </a>
+                            <a
+                                href="https://bit.ly/TechMaaInstagram"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                                <span class="sr-only">Instagram page</span>
+                            </a>
+                            <a
+                                href="https://bit.ly/TechmaaStore"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    viewBox="0 0 32 32"
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d=" M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.478-1.318.13-.33.244-.73.244-1.088 0-.058 0-.144-.03-.215-.1-.172-2.434-1.39-2.678-1.39zm-2.908 7.593c-1.747 0-3.48-.53-4.942-1.49L7.793 24.41l1.132-3.337a8.955 8.955 0 0 1-1.72-5.272c0-4.955 4.04-8.995 8.997-8.995S25.2 10.845 25.2 15.8c0 4.958-4.04 8.998-8.998 8.998zm0-19.798c-5.96 0-10.8 4.842-10.8 10.8 0 1.964.53 3.898 1.546 5.574L5 27.176l5.974-1.92a10.807 10.807 0 0 0 16.03-9.455c0-5.958-4.842-10.8-10.802-10.8z"
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                </svg>
+                                <span class="sr-only">Whatsapp page</span>
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/company/tech-maa/"
+                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                target="_blank"
+                            >
+                                <svg
+                                    viewBox="0 0 512 512"
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+                                    />
+                                </svg>
+                                <span class="sr-only">LinkedIn page</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <script src="./index.js"></script>
+    </body>
+</html>
