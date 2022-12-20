@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="./style.css" />
     </head>
     <body>
-        <div class="flex justify-center absolute right-0">
+        <div class="flex justify-center absolute left-0 right-0 lg:left-auto">
             <div
                 x-data="{
                     open: false,
@@ -102,7 +102,7 @@
         </div>
 
         <main lang="en">
-            <section class="bg-white dark:bg-gray-900">
+            <section class="bg-white">
                 <nav
                     x-data="{ isOpen: false }"
                     class="container mx-auto px-6 py-2 lg:flex lg:items-center lg:justify-between"
@@ -122,7 +122,7 @@
                                 x-cloak
                                 @click="isOpen = !isOpen"
                                 type="button"
-                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none"
                                 aria-label="toggle menu"
                             >
                                 <svg
@@ -163,28 +163,28 @@
                     <div
                         x-cloak
                         :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
-                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:dark:bg-transparent"
+                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none"
                     >
                         <div
                             class="lg:-px-8 flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0"
                         >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="./index.html"
                                 >Home</a
                             >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="./store.html"
                                 >Store</a
                             >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="./index.html#about-us"
                                 >About us</a
                             >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="#"
                                 >Story</a
                             >
@@ -213,7 +213,7 @@
                             <input
                                 type="text"
                                 id="search-navbar-en"
-                                class="block w-50 p-2 pl-3 text-sm text-gray-800 border border-gray-200 rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="block w-50 p-2 pl-3 text-sm text-gray-800 border border-gray-200 rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Search..."
                             />
                         </div>
@@ -222,9 +222,9 @@
             </section>
 
             <section>
-                <div tabindex="0" class="focus:outline-none p-24">
+                <div tabindex="0" class="focus:outline-none p-8 lg:p-24">
                     <h1
-                        class="text-center text-3xl font-semibold capitalize text-gray-800 mb-8 dark:text-white lg:text-4xl"
+                        class="text-center text-3xl font-semibold capitalize text-gray-800 mb-8 lg:text-4xl"
                     >
                         OUR PRODUCTS
                     </h1>
@@ -804,19 +804,17 @@
                 </div>
             </section>
 
-            <footer class="bg-white dark:bg-gray-900">
+            <footer class="bg-white">
                 <div class="container mx-auto px-6 py-16">
-                    <hr
-                        class="mb-6 border-gray-200 dark:border-gray-700 md:mb-10"
-                    />
+                    <hr class="mb-6 border-gray-200 md:mb-10" />
 
                     <div
                         class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
                     >
-                        <div class="col-span-2 pt-5">
+                        <div class="lg:col-span-2 pt-5">
                             <a
                                 href="#"
-                                class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                                class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700"
                                 >TECHMAA</a
                             >
                             <p class="mt-5 text-gray-700">
@@ -825,9 +823,7 @@
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 Quick Link
                             </p>
 
@@ -836,45 +832,41 @@
                             >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Home</a
                                 >
                                 <a
                                     href="./store.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Products</a
                                 >
                                 <a
                                     href="#about-us"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >About us</a
                                 >
                             </div>
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
-                                Products
-                            </p>
+                            <p class="font-semibold text-gray-800">Products</p>
 
                             <div
                                 class="mt-5 flex flex-col items-start space-y-2"
                             >
                                 <a
                                     href="./SWSWaterPurifier.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >SWS Water Purifier</a
                                 >
                                 <a
                                     href="./360DegreeSwivelFaucet.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >360 Degree Swivel Faucet</a
                                 >
                                 <a
                                     href="./TanklessInstantElectricWaterHeaterFaucet.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Tankless Instant Electric Water Heater
                                     Faucet</a
                                 >
@@ -882,9 +874,7 @@
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 Contact Us
                             </p>
 
@@ -893,28 +883,24 @@
                             >
                                 <a
                                     href="tel:+212763560046"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >+212763560046</a
                                 >
                                 <a
                                     href="mailto:contacttechmaa@gmail.com"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >contacttechmaa@gmail.com</a
                                 >
                             </div>
                         </div>
                     </div>
 
-                    <hr
-                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
-                    />
+                    <hr class="my-6 border-gray-200 md:my-10" />
 
                     <div
                         class="flex flex-col items-center justify-between sm:flex-row"
                     >
-                        <p
-                            class="mt-4 text-sm text-gray-500 dark:text-gray-300 sm:mt-0"
-                        >
+                        <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                             © Copyright 2022. All Rights Reserved.
                         </p>
 
@@ -923,7 +909,7 @@
                         >
                             <a
                                 href="https://bit.ly/TechMaafb"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -942,7 +928,7 @@
                             </a>
                             <a
                                 href="https://bit.ly/TechMaaInstagram"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -961,7 +947,7 @@
                             </a>
                             <a
                                 href="https://bit.ly/TechmaaStore"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -979,7 +965,7 @@
                             </a>
                             <a
                                 href="https://www.linkedin.com/company/tech-maa/"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -1000,7 +986,7 @@
         </main>
 
         <main lang="fr" class="hidden">
-            <section class="bg-white dark:bg-gray-900">
+            <section class="bg-white">
                 <nav
                     x-data="{ isOpen: false }"
                     class="container mx-auto px-6 py-2 lg:flex lg:items-center lg:justify-between"
@@ -1020,7 +1006,7 @@
                                 x-cloak
                                 @click="isOpen = !isOpen"
                                 type="button"
-                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none"
                                 aria-label="toggle menu"
                             >
                                 <svg
@@ -1061,28 +1047,28 @@
                     <div
                         x-cloak
                         :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
-                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:dark:bg-transparent"
+                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none"
                     >
                         <div
                             class="lg:-px-8 flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0"
                         >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="./index.html"
                                 >ACCUEIL</a
                             >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="./store.html"
                                 >Boutique</a
                             >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="./index.html#À propos de nous"
                                 >À propos de nous</a
                             >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="#"
                                 >Histoire</a
                             >
@@ -1111,7 +1097,7 @@
                             <input
                                 type="text"
                                 id="search-navbar-fr"
-                                class="block w-50 p-2 pl-3 text-sm text-gray-800 border border-gray-200 rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="block w-50 p-2 pl-3 text-sm text-gray-800 border border-gray-200 rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Chercher..."
                             />
                         </div>
@@ -1120,9 +1106,9 @@
             </section>
 
             <section>
-                <div tabindex="0" class="focus:outline-none p-24">
+                <div tabindex="0" class="focus:outline-none p-8 lg:p-24">
                     <h1
-                        class="text-center text-3xl font-semibold capitalize text-gray-800 mb-8 dark:text-white lg:text-4xl"
+                        class="text-center text-3xl font-semibold capitalize text-gray-800 mb-8 lg:text-4xl"
                     >
                         NOS PRODUITS
                     </h1>
@@ -1726,19 +1712,17 @@
                 </div>
             </section>
 
-            <footer class="bg-white dark:bg-gray-900">
+            <footer class="bg-white">
                 <div class="container mx-auto px-6 py-16">
-                    <hr
-                        class="mb-6 border-gray-200 dark:border-gray-700 md:mb-10"
-                    />
+                    <hr class="mb-6 border-gray-200 md:mb-10" />
 
                     <div
                         class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
                     >
-                        <div class="col-span-2 pt-5">
+                        <div class="lg:col-span-2 pt-5">
                             <a
                                 href="#"
-                                class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                                class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700"
                                 >TECHMAA</a
                             >
                             <p class="mt-5 text-gray-700">
@@ -1747,9 +1731,7 @@
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 Lien rapide
                             </p>
 
@@ -1758,26 +1740,24 @@
                             >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >ACCUEIL</a
                                 >
                                 <a
                                     href="./store.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Des produits</a
                                 >
                                 <a
                                     href="#À propos de nous"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >À propos de nous</a
                                 >
                             </div>
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 Des produits
                             </p>
 
@@ -1786,17 +1766,17 @@
                             >
                                 <a
                                     href="./SWSWaterPurifier.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Purificateur d'eau SWS</a
                                 >
                                 <a
                                     href="./360DegreeSwivelFaucet.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Robinet pivotant à 360 degrés</a
                                 >
                                 <a
                                     href="./TanklessInstantElectricWaterHeaterFaucet.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Robinet de chauffe-eau électrique
                                     instantané sans réservoir</a
                                 >
@@ -1804,9 +1784,7 @@
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 Nous contacter
                             </p>
 
@@ -1815,28 +1793,24 @@
                             >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >+212763560046</a
                                 >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >contacttechmaa@gmail.com</a
                                 >
                             </div>
                         </div>
                     </div>
 
-                    <hr
-                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
-                    />
+                    <hr class="my-6 border-gray-200 md:my-10" />
 
                     <div
                         class="flex flex-col items-center justify-between sm:flex-row"
                     >
-                        <p
-                            class="mt-4 text-sm text-gray-500 dark:text-gray-300 sm:mt-0"
-                        >
+                        <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                             © Copyright 2022. Tous droits réservés.
                         </p>
 
@@ -1845,7 +1819,7 @@
                         >
                             <a
                                 href="https://bit.ly/TechMaafb"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -1864,7 +1838,7 @@
                             </a>
                             <a
                                 href="https://bit.ly/TechMaaInstagram"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -1883,7 +1857,7 @@
                             </a>
                             <a
                                 href="https://bit.ly/TechmaaStore"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -1901,7 +1875,7 @@
                             </a>
                             <a
                                 href="https://www.linkedin.com/company/tech-maa/"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -1922,7 +1896,7 @@
         </main>
 
         <main lang="ar" class="hidden">
-            <section class="bg-white dark:bg-gray-900">
+            <section class="bg-white">
                 <nav
                     x-data="{ isOpen: false }"
                     class="container mx-auto px-6 py-2 lg:flex lg:items-center lg:justify-between"
@@ -1942,7 +1916,7 @@
                                 x-cloak
                                 @click="isOpen = !isOpen"
                                 type="button"
-                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none"
                                 aria-label="toggle menu"
                             >
                                 <svg
@@ -1983,28 +1957,28 @@
                     <div
                         x-cloak
                         :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
-                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:dark:bg-transparent"
+                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none"
                     >
                         <div
                             class="lg:-px-8 flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0"
                         >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="./index.html"
                                 >الرئيسية
                             </a>
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="./store.html"
                                 >المتجر
                             </a>
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="./index.html#عنا"
                                 >معلومات عنا
                             </a>
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold dark:text-gray-200 dark:hover:text-blue-400 lg:mx-4"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 font-semibold lg:mx-4"
                                 href="#"
                                 >ابحث
                             </a>
@@ -2033,7 +2007,7 @@
                             <input
                                 type="text"
                                 id="search-navbar-ar"
-                                class="block w-50 p-2 pl-3 text-sm text-gray-800 border border-gray-200 rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                class="block w-50 p-2 pl-3 text-sm text-gray-800 border border-gray-200 rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="ابحث..."
                             />
                         </div>
@@ -2042,9 +2016,9 @@
             </section>
 
             <section>
-                <div tabindex="0" class="focus:outline-none p-24">
+                <div tabindex="0" class="focus:outline-none p-8 lg:p-24">
                     <h1
-                        class="text-center text-3xl font-semibold capitalize text-gray-800 mb-8 dark:text-white lg:text-4xl"
+                        class="text-center text-3xl font-semibold capitalize text-gray-800 mb-8 lg:text-4xl"
                     >
                         افضل منتجاتنا
                     </h1>
@@ -2634,19 +2608,17 @@
                 </div>
             </section>
 
-            <footer class="bg-white dark:bg-gray-900">
+            <footer class="bg-white">
                 <div class="container mx-auto px-6 py-16">
-                    <hr
-                        class="mb-6 border-gray-200 dark:border-gray-700 md:mb-10"
-                    />
+                    <hr class="mb-6 border-gray-200 md:mb-10" />
 
                     <div
                         class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
                     >
-                        <div class="col-span-2 pt-5">
+                        <div class="lg:col-span-2 pt-5">
                             <a
                                 href="#"
-                                class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                                class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700"
                                 >تيكما</a
                             >
                             <p class="mt-5 text-gray-700">
@@ -2655,9 +2627,7 @@
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 تنقل بسرعة
                             </p>
 
@@ -2666,26 +2636,24 @@
                             >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >الرئيسية</a
                                 >
                                 <a
                                     href="./store.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >منتجاتنا</a
                                 >
                                 <a
                                     href="#عنا"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >عنا</a
                                 >
                             </div>
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 افضل المنتجات
                             </p>
 
@@ -2694,20 +2662,20 @@
                             >
                                 <a
                                     href="./SWSWaterPurifier.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >SWS جهاز تصفية و تنقية المياه من 5 طبقات
                                     للمنزل والمطبخ</a
                                 >
                                 <a
                                     href="./360DegreeSwivelFaucet.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >فلتر الماء الدوار 360 المتطور لتنقية ماء
                                     الصنبور وتوفير المياه أداة غسل يدوية دوارة-
                                     تمديد الصنبور</a
                                 >
                                 <a
                                     href="./TanklessInstantElectricWaterHeaterFaucet.html"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >سخان مياه كهربائي فوري بدون خزان، للمطبخ
                                     والحمام</a
                                 >
@@ -2715,9 +2683,7 @@
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 تواصل معنا
                             </p>
 
@@ -2726,28 +2692,24 @@
                             >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >+212763560046</a
                                 >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >contacttechmaa@gmail.com</a
                                 >
                             </div>
                         </div>
                     </div>
 
-                    <hr
-                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
-                    />
+                    <hr class="my-6 border-gray-200 md:my-10" />
 
                     <div
                         class="flex flex-col items-center justify-between sm:flex-row"
                     >
-                        <p
-                            class="mt-4 text-sm text-gray-500 dark:text-gray-300 sm:mt-0"
-                        >
+                        <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                             © حقوق الطبع والنشر 2022. جميع الحقوق محفوظة.
                         </p>
 
@@ -2756,7 +2718,7 @@
                         >
                             <a
                                 href="https://bit.ly/TechMaafb"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -2775,7 +2737,7 @@
                             </a>
                             <a
                                 href="https://bit.ly/TechMaaInstagram"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -2794,7 +2756,7 @@
                             </a>
                             <a
                                 href="https://bit.ly/TechmaaStore"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -2812,7 +2774,7 @@
                             </a>
                             <a
                                 href="https://www.linkedin.com/company/tech-maa/"
-                                class="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+                                class="text-gray-500 hover:text-gray-900"
                                 target="_blank"
                             >
                                 <svg
@@ -2846,10 +2808,12 @@
                     ) {
                         item.classList.add('hidden');
                     }
-                    console.log(item
+                    console.log(
+                        item
                             .getElementsByClassName('product-title')[0]
                             .innerText.toUpperCase(),
-                            decodeURIComponent(str))
+                        decodeURIComponent(str)
+                    );
                 }
             }
         </script>

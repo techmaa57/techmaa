@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark">
+<html>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,7 @@
     </head>
     <body>
         <main>
-            <section class="bg-white dark:bg-gray-900">
+            <section class="bg-white">
                 <nav
                     x-data="{ isOpen: false }"
                     class="container mx-auto p-6 lg:flex lg:items-center lg:justify-between"
@@ -27,7 +27,7 @@
                                 x-cloak
                                 @click="isOpen = !isOpen"
                                 type="button"
-                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none dark:text-gray-200 dark:hover:text-gray-400 dark:focus:text-gray-400"
+                                class="text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:outline-none"
                                 aria-label="toggle menu"
                             >
                                 <svg
@@ -69,28 +69,28 @@
                     <div
                         x-cloak
                         :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
-                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out dark:bg-gray-900 lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:dark:bg-transparent"
+                        class="absolute inset-x-0 z-20 w-full bg-white px-6 py-4 shadow-md transition-all duration-300 ease-in-out lg:relative lg:top-0 lg:mt-0 lg:flex lg:w-auto lg:translate-x-0 lg:items-center lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none"
                     >
                         <div
                             class="lg:-px-8 flex flex-col space-y-4 lg:mt-0 lg:flex-row lg:space-y-0"
                         >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 lg:mx-8"
                                 href="#"
                                 >Home</a
                             >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 lg:mx-8"
                                 href="#"
                                 >Shop</a
                             >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 lg:mx-8"
                                 href="#"
                                 >About us</a
                             >
                             <a
-                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-400 lg:mx-8"
+                                class="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 lg:mx-8"
                                 href="#"
                                 >Privacy Policy</a
                             >
@@ -106,10 +106,10 @@
                 </nav>
             </section>
 
-            <section class="bg-gray-100 dark:bg-gray-800">
+            <section class="bg-gray-100">
                 <div class="container mx-auto px-6 py-10">
                     <h1
-                        class="text-center text-3xl font-semibold capitalize text-gray-800 dark:text-white lg:text-4xl"
+                        class="text-center text-3xl font-semibold capitalize text-gray-800 lg:text-4xl"
                     >
                         Policy
                     </h1>
@@ -127,15 +127,13 @@
                     </div>
 
                     <div>
-                        <h1
-                            class="mt-6 text-xl font-semibold text-gray-800 dark:text-white"
-                        >
+                        <h1 class="mt-6 text-xl font-semibold text-gray-800">
                             1. Privacy Policy
                         </h1>
                         <p class="font-bold text-gray-700 mt-5">
                             Thank you for visiting our website.
                         </p>
-                        <p class="mt-6 text-gray-600 dark:text-gray-300">
+                        <p class="mt-6 text-gray-600">
                             We have adopted and implemented the following
                             privacy policy as part of our commitment to
                             protecting your privacy and personal information.
@@ -351,33 +349,31 @@
                     </div>
 
                     <div>
-                        <h1
-                            class="mt-6 text-xl font-semibold text-gray-800 dark:text-white"
-                        >
+                        <h1 class="mt-6 text-xl font-semibold text-gray-800">
                             2. Return & Exchange Policy
                         </h1>
                         <ul class="list-disc pl-5">
-                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                            <li class="mt-6 text-gray-600">
                                 2 days for all products
                             </li>
-                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                            <li class="mt-6 text-gray-600">
                                 Unopened products may be returned within 2 days
                                 of delivery receipt for a full refund.
                             </li>
-                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                            <li class="mt-6 text-gray-600">
                                 Opened products may be returned within 2 days of
                                 delivery.
                             </li>
-                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                            <li class="mt-6 text-gray-600">
                                 A 10% restocking fee may be applied based on the
                                 condition of the product and packaging to all
                                 opened products.
                             </li>
-                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                            <li class="mt-6 text-gray-600">
                                 Return freight is the responsibility of the
                                 purchaser unless the item is deemed defective.
                             </li>
-                            <li class="mt-6 text-gray-600 dark:text-gray-300">
+                            <li class="mt-6 text-gray-600">
                                 To initiate a return, please contact Order
                                 Support.
                             </li>
@@ -386,13 +382,13 @@
                 </div>
             </section>
 
-            <footer class="bg-white dark:bg-gray-900">
+            <footer class="bg-white">
                 <div class="container mx-auto px-6 py-12">
                     <div
                         class="md:-mx-3 md:flex md:items-center md:justify-between"
                     >
                         <h1
-                            class="text-3xl font-semibold tracking-tight text-gray-800 dark:text-white md:mx-3 xl:text-4xl"
+                            class="text-3xl font-semibold tracking-tight text-gray-800 md:mx-3 xl:text-4xl"
                         >
                             Subscribe our newsletter to get update.
                         </h1>
@@ -422,17 +418,13 @@
                         </div>
                     </div>
 
-                    <hr
-                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
-                    />
+                    <hr class="my-6 border-gray-200 md:my-10" />
 
                     <div
                         class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
                     >
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 Quick Link
                             </p>
 
@@ -441,26 +433,24 @@
                             >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Home</a
                                 >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Who We Are</a
                                 >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Our Philosophy</a
                                 >
                             </div>
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 Industries
                             </p>
 
@@ -469,54 +459,48 @@
                             >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Retail & E-Commerce</a
                                 >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Information Technology</a
                                 >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Finance & Insurance</a
                                 >
                             </div>
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
-                                Services
-                            </p>
+                            <p class="font-semibold text-gray-800">Services</p>
 
                             <div
                                 class="mt-5 flex flex-col items-start space-y-2"
                             >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Translation</a
                                 >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Proofreading & Editing</a
                                 >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >Content Creation</a
                                 >
                             </div>
                         </div>
 
                         <div>
-                            <p
-                                class="font-semibold text-gray-800 dark:text-white"
-                            >
+                            <p class="font-semibold text-gray-800">
                                 Contact Us
                             </p>
 
@@ -525,34 +509,30 @@
                             >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >+880 768 473 4978</a
                                 >
                                 <a
                                     href="#"
-                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline dark:text-gray-300 dark:hover:text-blue-400"
+                                    class="text-gray-600 transition-colors duration-300 hover:text-blue-500 hover:underline"
                                     >info@merakiui.com</a
                                 >
                             </div>
                         </div>
                     </div>
 
-                    <hr
-                        class="my-6 border-gray-200 dark:border-gray-700 md:my-10"
-                    />
+                    <hr class="my-6 border-gray-200 md:my-10" />
 
                     <div
                         class="flex flex-col items-center justify-between sm:flex-row"
                     >
                         <a
                             href="#"
-                            class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                            class="text-2xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700"
                             >Brand</a
                         >
 
-                        <p
-                            class="mt-4 text-sm text-gray-500 dark:text-gray-300 sm:mt-0"
-                        >
+                        <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                             © Copyright 2021. All Rights Reserved.
                         </p>
                     </div>
