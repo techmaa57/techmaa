@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="./assets/logo.png" />
         <script src="./talwind.js"></script>
         <script src="./alpinejs.min.js" defer></script>
         <link rel="stylesheet" href="./style.css" />
@@ -108,11 +109,13 @@
                 >
                     <div class="flex items-center justify-between">
                         <div>
-                            <img
-                                src="./assets/logo.png"
-                                alt=""
-                                class="h-9 mr-3 sm:h-24"
-                            />
+                            <a href="./index.html">
+                                <img
+                                    src="./assets/logo.png"
+                                    alt=""
+                                    class="h-9 mr-3 sm:h-24"
+                                />
+                            </a>
                         </div>
 
                         <!-- Mobile menu button -->
@@ -221,7 +224,7 @@
             </section>
 
             <section>
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-6 pb-16">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
                     <nav class="flex mb-16" aria-label="Breadcrumb">
                         <ol
                             class="inline-flex items-center space-x-1 md:space-x-3"
@@ -411,12 +414,12 @@
                                     >
                                         <span
                                             class="font-bold text-gray-800 text-2xl mr-1"
-                                            >Dhs </span
-                                        >
+                                            >Dhs
+                                        </span>
                                         <span
                                             class="font-bold text-gray-600 text-lg line-through"
                                         >
-                                            Dhs 
+                                            Dhs
                                         </span>
                                         <div class="md:pl-6">
                                             <p
@@ -856,11 +859,13 @@
                 >
                     <div class="flex items-center justify-between">
                         <div>
-                            <img
-                                src="./assets/logo.png"
-                                alt=""
-                                class="h-9 mr-3 sm:h-24"
-                            />
+                            <a href="./index.html">
+                                <img
+                                    src="./assets/logo.png"
+                                    alt=""
+                                    class="h-9 mr-3 sm:h-24"
+                                />
+                            </a>
                         </div>
 
                         <!-- Mobile menu button -->
@@ -969,7 +974,7 @@
             </section>
 
             <section>
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-6 pb-16">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
                     <nav class="flex mb-16" aria-label="Breadcrumb">
                         <ol
                             class="inline-flex items-center space-x-1 md:space-x-3"
@@ -1164,12 +1169,12 @@
                                     >
                                         <span
                                             class="font-bold text-gray-800 text-2xl mr-1"
-                                            >Dhs </span
-                                        >
+                                            >Dhs
+                                        </span>
                                         <span
                                             class="font-bold text-gray-600 text-lg line-through"
                                         >
-                                            Dhs 
+                                            Dhs
                                         </span>
                                         <div class="md:pl-6">
                                             <p
@@ -1612,11 +1617,13 @@
                 >
                     <div class="flex items-center justify-between">
                         <div>
-                            <img
-                                src="./assets/logo.png"
-                                alt=""
-                                class="h-9 mr-3 sm:h-24"
-                            />
+                            <a href="./index.html">
+                                <img
+                                    src="./assets/logo.png"
+                                    alt=""
+                                    class="h-9 mr-3 sm:h-24"
+                                />
+                            </a>
                         </div>
 
                         <!-- Mobile menu button -->
@@ -1725,7 +1732,7 @@
             </section>
 
             <section>
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-6 pb-16">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
                     <nav class="flex mb-16" aria-label="Breadcrumb">
                         <ol
                             class="inline-flex items-center space-x-1 md:space-x-3"
@@ -1910,12 +1917,12 @@
                                     >
                                         <span
                                             class="font-bold text-gray-800 text-2xl mr-1"
-                                            >Dhs </span
-                                        >
+                                            >Dhs
+                                        </span>
                                         <span
                                             class="font-bold text-gray-600 text-lg line-through"
                                         >
-                                            Dhs 
+                                            Dhs
                                         </span>
                                         <div class="md:pl-6">
                                             <p
@@ -2038,7 +2045,7 @@
 
                                 <form
                                     class="mt-6"
-                                    onsubmit="sendmail(event, 'en')"
+                                    onsubmit="sendmail(event, 'ar')"
                                 >
                                     <div
                                         class="grid grid-cols-1 md:grid-cols-2 gap-6"
@@ -2369,6 +2376,13 @@
                 var city = document.getElementById(`city_${lang}`).value;
                 var address = document.getElementById(`address_${lang}`).value;
                 var message = document.getElementById(`message_${lang}`).value;
+
+                console.log(
+                    city,
+                    document.getElementById(`city_${lang}`).value,
+                    lang,
+                    document.getElementById(`city_ar`).value
+                );
 
                 var Body =
                     'Name: ' +
