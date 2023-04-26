@@ -65,6 +65,14 @@ html {
 
 }
 
+.service-banner {
+
+    background: linear-gradient(to top, rgba(228,221,221, 0.50) 10%, rgba(0,0,0, 0.80 ) 90%), 
+                url('./assets/plomberie1.jpg') no-repeat right top;
+    background-size: cover;
+
+}
+
 .about-us {
     background: linear-gradient(to top left, rgba(228,221,221, 0.10) 10%, rgba(0,0,0, 0.80 ) 50%), 
                 url('./assets/bgimage3.jpg') no-repeat center top;
@@ -74,5 +82,11 @@ html {
 .form-banner {
     background: linear-gradient(to top left, rgba(228,221,221, 0.10) 10%, rgba(0,0,0, 0.60 ) 50%), 
                 url('./assets/bgimage7.jpg') no-repeat center top;
+    background-size: cover;
+}
+
+.formservice-banner {
+    background: linear-gradient(to top left, rgba(228,221,221, 0.10) 10%, rgba(0,0,0, 0.60 ) 100%), 
+                url('./assets/plomberie2.jpg') no-repeat center top;
     background-size: cover;
 }
