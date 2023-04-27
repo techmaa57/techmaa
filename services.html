@@ -1648,6 +1648,63 @@
             </footer>
         </main>
 
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+        <script>
+            function sendmail(e, lang) {
+                e.preventDefault();
+
+                var product = document.getElementById(`product_${lang}`).value;
+                var quantity = document.getElementById(
+                    `quantity_${lang}`
+                ).value;
+                var name = document.getElementById(`name_${lang}`).value;
+                var email = document.getElementById(`email_${lang}`).value;
+                var number = document.getElementById(`number_${lang}`).value;
+                var city = document.getElementById(`city_${lang}`).value;
+                var address = document.getElementById(`address_${lang}`).value;
+                var message = document.getElementById(`message_${lang}`).value;
+
+                var Body =
+                    'Name: ' +
+                    name +
+                    '<br>Email: ' +
+                    email +
+                    '<br>Phone Number: ' +
+                    number +
+                    '<br>Address: ' +
+                    address +
+                    '<br>City: ' +
+                    city +
+                    '<br><br>Product: ' +
+                    product +
+                    '<br>Quantity: ' +
+                    quantity +
+                    '<br><br>Message: ' +
+                    message;
+
+                Email.send({
+                    EnableSsl: true,
+                    UseDefaultCredentials: false,
+                    Port: 2525,
+                    SecureToken: 'b08add2c-bb14-4dfb-8019-3b17ab34a9b7',
+                    To: 'contacttechmaa@gmail.com',
+                    From: 'contacttechmaa@gmail.com',
+                    Subject: name,
+                    Body: Body,
+                }).then((message) => {
+                    if (message == 'OK') {
+                        alert(
+                            'Your mail has been send. Thank you for connecting.'
+                        );
+                    } else {
+                        console.error(message);
+                        alert('There is error at sending message. ');
+                    }
+                });
+            }
+        </script>
+
         <script src="./index.js"></script>
     </body>
 </html>
