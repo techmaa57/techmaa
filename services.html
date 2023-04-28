@@ -361,7 +361,19 @@
                                             />
                                         </div>
 
-
+                                        <div class="flex-1">
+                                            <label
+                                                class="mb-2 block text-sm text-gray-700 font-medium"
+                                                >Quantity</label
+                                            >
+                                            <input
+                                                id="quantity_en"
+                                                type="number"
+                                                placeholder="Quantity"
+                                                class="mt-2 block w-full rounded-md border border-gray-300 bg-white shadow-sm text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                                required
+                                            />
+                                        </div>
 
                                         <div class="flex-1">
                                             <label
@@ -1682,7 +1694,10 @@
             function sendmail(e, lang) {
                 e.preventDefault();
 
-
+                var product = document.getElementById(`product_${lang}`).value;
+                var quantity = document.getElementById(
+                    `quantity_${lang}`
+                ).value;
                 var name = document.getElementById(`name_${lang}`).value;
                 var email = document.getElementById(`email_${lang}`).value;
                 var number = document.getElementById(`number_${lang}`).value;
@@ -1701,7 +1716,10 @@
                     address +
                     '<br>City: ' +
                     city +
-                    
+                    '<br><br>Product: ' +
+                    product +
+                    '<br>Quantity: ' +
+                    quantity +
                     '<br><br>Message: ' +
                     message;
 
