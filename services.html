@@ -1694,8 +1694,8 @@
             function sendmail(e, lang) {
                 e.preventDefault();
 
-                var product = document.getElementById(`product_${lang}`).value;
-                var quantity = document.getElementById(
+                var Field = document.getElementById(`product_${lang}`).value;
+                var Service = document.getElementById(
                     `quantity_${lang}`
                 ).value;
                 var name = document.getElementById(`name_${lang}`).value;
@@ -1717,9 +1717,9 @@
                     '<br>City: ' +
                     city +
                     '<br><br>Product: ' +
-                    product +
+                    Field +
                     '<br>Quantity: ' +
-                    quantity +
+                    Service +
                     '<br><br>Message: ' +
                     message;
 
