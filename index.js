@@ -59,7 +59,7 @@ function faq(event) {
 }
 
 function search(lang){
-    window.location = "https://techmaa57.com/store.html?" + document.getElementById(`search-navbar-${lang}`).value.toUpperCase();
+    window.location = "https://qatralik.com/store.html?" + document.getElementById(`search-navbar-${lang}`).value.toUpperCase();
 }
 
 
